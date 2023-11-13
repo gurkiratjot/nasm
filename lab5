@@ -1,0 +1,16 @@
+global main                             ; must be declared for final compilation
+
+SECTION .data                           ; data for the program
+    msg db "Hello, world!", 0xa         ; string to be printed
+    len equ $ - msg                     ; length of the string
+
+SECTION .text
+
+main:                                   ; tells compiler where the program starts
+    mov edx, len                        ; load message length into edx register
+    mov ecx, msg                        ; load memory location of message into ecx register
+    mov ebx, 1                          ; sets where to write message (stdout)
+    mov eax, 4                          ; set system call for performing a write
+    int 0x80                            ; call operating system kernel to perform operation
+    mov eax, 1                          ; set system call for exit
+    int 0x80                            ; call operating system kernel to perform operation
